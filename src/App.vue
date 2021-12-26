@@ -158,11 +158,17 @@
                 }
             }
 
+            const team_names = new Set();
             for (const team of teams) {
                 if (team.length === 0 || team.length > 30) {
                     alert(`隊伍名稱長度需介於 1 ~ 30 字元`);
                     return false;
                 }
+                if (team_names.has(team)) {
+                    alert(`隊伍名稱不可重複`);
+                    return false;
+                }
+                team_names.add(team);
             }
 
             return true;
