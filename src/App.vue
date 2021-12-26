@@ -27,6 +27,7 @@
         description: "",
     });
     const challenges = reactive([new Challenge()]);
+    const teams = reactive([]);
 
     function new_challenge() {
         challenges.push(new Challenge());
@@ -56,28 +57,21 @@
                 }
             }
 
-            console.log(
-                JSON.stringify(
-                    {
-                        name: game.name,
-                        description: game.description,
-                        challenges,
-                    },
-                    null,
-                    2
-                )
-            );
+            const box = {
+                name: game.name,
+                description: game.description,
+                challenges,
+                teams,
+            };
+
+            console.log(JSON.stringify(box, null, 2));
 
             const res = await fetch(endpoint + "/create", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({
-                    name: game.name,
-                    description: game.description,
-                    challenges: challenges,
-                }),
+                body: JSON.stringify(box),
             });
 
             const data = await res.json();
@@ -163,6 +157,14 @@
                     }
                 }
             }
+
+            for (const team of teams) {
+                if (team.length === 0 || team.length > 30) {
+                    alert(`隊伍名稱長度需介於 1 ~ 30 字元`);
+                    return false;
+                }
+            }
+
             return true;
         } catch (err) {
             alert("資料錯誤，請重新填寫");
@@ -184,6 +186,15 @@
             <input class="ch-input" :value="challenges.length" disabled />
             <label class="ch-label">關卡總分</label>
             <input class="ch-input" :value="challenges.reduce((acc, cur) => acc + cur.points, 0)" disabled />
+        </div>
+        <div class="ch teams">
+            <label class="ch-label">分組組別</label>
+            <div class="ch-team" v-for="(team, index) in teams">
+                <label class="ch-label">第 {{ index + 1 }} 組名稱</label>
+                <input class="ch-input" v-model="teams[index]" placeholder="組別名稱" />
+            </div>
+            <!-- add team button-->
+            <button class="ch-button text-right w-full pr-2" @click="teams.push('')">新增組別</button>
         </div>
         <div id="save-game" class="ch" @click="save_game">
             <button>儲存</button>
@@ -275,6 +286,10 @@
 
     .game {
         @apply shadow-amber-100 rounded border-2 border-amber-100;
+    }
+
+    .teams {
+        @apply shadow-lime-100 rounded border-2 border-lime-100;
     }
 
     #save-game {
