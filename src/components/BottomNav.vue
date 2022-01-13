@@ -12,6 +12,12 @@
                 <span>遊玩</span>
             </div>
         </router-link>
+        <router-link class="bnv-item" to="/ranking" @click="activePage(1)">
+            <div>
+                <i class="fas fa-list-ul text-2xl"></i>
+                <span>排名</span>
+            </div>
+        </router-link>
         <router-link class="bnv-item" to="/create" @click="activePage(2)">
             <div>
                 <i class="fas fa-plus text-2xl"></i>

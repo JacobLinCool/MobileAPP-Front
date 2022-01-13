@@ -10,7 +10,7 @@
                             <div class="ch">
                                 <label class="ch-label">遊戲 ID</label>
                                 <input class="ch-input" v-model="game.id" placeholder="abc123" />
-                                <button @click="join">加入</button>
+                                <a @click="join" href="javascript:void(0)" class="w-full inline-block">加入</a>
                             </div>
                         </div>
                         <div v-if="state === 1">
@@ -58,7 +58,9 @@
 
 <script lang="ts" setup>
     import { reactive, ref } from "vue";
+    import { useRouter } from "vue-router";
     import Swal from "sweetalert2";
+    import { endpoint } from "../api";
 
     function alert(title: string, text = "") {
         Swal.fire({
@@ -78,7 +80,7 @@
         });
     }
 
-    const endpoint = "https://mobile-app-server.jacoblincool.repl.co";
+    const router = useRouter();
 
     const state = ref(0);
 
@@ -91,10 +93,11 @@
         game.id = game_id;
     }
 
-    const player: any = reactive({
+    const player = reactive({
         name: "",
         team: "",
         challenge: 0,
+        start: 0,
     });
 
     const password = ref("");
@@ -125,6 +128,17 @@
     }
 
     function start() {
+        if (player.name.length === 0) {
+            alert("請輸入玩家名稱");
+            return;
+        }
+        if (game.teams?.length > 0 && player.team.length === 0) {
+            alert("請選擇隊伍");
+            return;
+        }
+
+        player.start = Date.now();
+
         console.log(game, player);
         state.value = 2;
 
@@ -148,8 +162,12 @@
             if (dist <= 200) {
                 player.challenge++;
                 if (player.challenge >= game.challenges.length) {
-                    success("遊戲結束", "恭喜你過關了");
+                    success("恭喜你過關了", "成績：" + stringify_time(Math.floor((Date.now() - player.start) / 1000)));
                     state.value = 0;
+                    save_record().then(() => {
+                        router.push("/ranking?id=" + game.id);
+                    });
+                    clearInterval(pos_interval.value);
                 }
             } else {
                 alert("不在指定位置附近", `目前距離 ${dist} 公尺`);
@@ -159,8 +177,12 @@
                 player.challenge++;
                 password.value = "";
                 if (player.challenge >= game.challenges.length) {
-                    success("遊戲結束", "恭喜你過關了");
+                    success("恭喜你過關了", "成績：" + stringify_time(Math.floor((Date.now() - player.start) / 1000)));
                     state.value = 0;
+                    save_record().then(() => {
+                        router.push("/ranking?id=" + game.id);
+                    });
+                    clearInterval(pos_interval.value);
                 }
             } else {
                 alert("密碼錯誤");
@@ -187,17 +209,47 @@
     }
 
     function calc_dist(lat1: number, lon1: number, lat2: number, lon2: number) {
-        const R = 6371; // Radius of the earth in km
-        const dLat = deg2rad(lat2 - lat1); // deg2rad below
+        const R = 6371;
+        const dLat = deg2rad(lat2 - lat1);
         const dLon = deg2rad(lon2 - lon1);
         const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
         const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        const d = R * c; // Distance in km
+        const d = R * c;
         return d * 1000;
     }
 
     function deg2rad(deg: number) {
         return deg * (Math.PI / 180);
+    }
+
+    async function save_record() {
+        await fetch(`${endpoint}/ranking/add`, {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify({
+                id: game.id,
+                name: player.name,
+                team: player.team,
+                time: Math.floor((Date.now() - player.start) / 1000),
+            }),
+        }).then((res) => res.ok);
+    }
+
+    function stringify_time(second: number) {
+        const h = Math.floor(second / 3600);
+        const m = Math.floor((second - h * 3600) / 60);
+        const s = second - h * 3600 - m * 60;
+
+        let result = `${s} 秒`;
+        if (m > 0) {
+            result = `${m} 分 ${result}`;
+        }
+        if (h > 0) {
+            result = `${h} 小時 ${result}`;
+        }
+        return result;
     }
 </script>
 

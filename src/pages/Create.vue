@@ -74,7 +74,9 @@
 
 <script lang="ts" setup>
     import { reactive } from "vue";
+    import { useRouter } from "vue-router";
     import Swal from "sweetalert2";
+    import { endpoint } from "../api";
 
     function alert(title: string, text = "") {
         return Swal.fire({
@@ -94,7 +96,8 @@
         });
     }
 
-    const endpoint = "https://mobile-app-server.jacoblincool.repl.co";
+    const router = useRouter();
+
     const modes = ["GPS 定位挑戰", "通關密碼挑戰"];
     class Challenge {
         name = "";
@@ -160,7 +163,7 @@
                 alert("錯誤", data.msg);
             } else {
                 success("遊戲已建立！ ID: " + data.id).then(() => {
-                    window.location.href = "/play?id=" + data.id;
+                    router.push("/play?id=" + data.id);
                 });
             }
         }

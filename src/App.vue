@@ -2,7 +2,7 @@
     <div id="main-view" ref="mainView">
         <router-view v-slot="{ Component }">
             <transition name="page-switch" mode="out-in">
-                <component :is="Component" :key="$route.path"></component>
+                <component :is="Component" :key="route.path"></component>
             </transition>
         </router-view>
     </div>
@@ -12,17 +12,11 @@
     </transition>
 </template>
 
-<script lang="ts">
-    import { defineComponent } from "vue";
+<script lang="ts" setup>
+    import { useRoute } from "vue-router";
     import BottomNav from "./components/BottomNav.vue";
 
-    export default defineComponent({
-        name: "App",
-        components: {
-            BottomNav,
-        },
-        mounted() {},
-    });
+    const route = useRoute();
 </script>
 
 <style>
