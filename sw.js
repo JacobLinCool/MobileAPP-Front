@@ -133,7 +133,7 @@ define(['./workbox-e172ad1d'], (function (workbox) { 'use strict';
     "revision": "e7b93d3ed382ead5be1a874beec3671c"
   }, {
     "url": "index.html",
-    "revision": "f293fe0405a93a9354c2dd5076090389"
+    "revision": "de5e79cc3f1fa16dcaebed8ad09b3804"
   }, {
     "url": "registerSW.js",
     "revision": "1872c500de691dce40960bb85481de07"
