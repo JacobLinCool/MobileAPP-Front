@@ -1,5 +1,5 @@
 <template>
-    <div id="home">
+    <div id="ranking">
         <transition name="fade">
             <div id="container" v-show="true">
                 <div id="safe-area" class="w-full my-3"></div>
@@ -133,7 +133,7 @@
 </script>
 
 <style scoped>
-    #home {
+    #ranking {
         position: absolute;
         top: 0;
         left: 0;

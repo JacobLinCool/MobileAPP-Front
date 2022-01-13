@@ -1,5 +1,5 @@
 <template>
-    <div id="main-view" ref="mainView">
+    <div id="main-view">
         <router-view v-slot="{ Component }">
             <transition name="page-switch" mode="out-in">
                 <component :is="Component" :key="route.path"></component>

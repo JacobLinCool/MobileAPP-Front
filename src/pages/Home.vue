@@ -1,11 +1,11 @@
 <template>
-    <div id="ranking">
+    <div id="home">
         <transition name="fade">
             <div id="container" v-show="true">
                 <div id="safe-area" class="w-full my-3"></div>
-                <div id="fast-action" ref="fastAction" class="w-11/12 m-auto bg-white my-2 py-3 px-2 shadow rounded">
-                    <h1 ref="facGreeting" class="text-2xl">你好，歡迎使用 RPG+！</h1>
-                    <p ref="facMessage">
+                <div id="fast-action" class="w-11/12 m-auto bg-white my-2 py-3 px-2 shadow rounded">
+                    <h1 class="text-2xl">你好，歡迎使用 RPG+！</h1>
+                    <p>
                         已有遊戲代碼想要開始玩？ <router-link to="/play">點我加入遊戲！</router-link> <br />
                         或是想要製作新的遊戲？ <router-link to="/create">點我製作遊戲！</router-link>
                     </p>
@@ -48,7 +48,7 @@
 </script>
 
 <style scoped>
-    #ranking {
+    #home {
         position: absolute;
         top: 0;
         left: 0;
