@@ -93,44 +93,56 @@ define(['./workbox-e172ad1d'], (function (workbox) { 'use strict';
    */
 
   workbox.precacheAndRoute([{
-    "url": "assets/Create.2c1e1e3f.css",
-    "revision": "ee9232883367ba09a62f775f6386a3c0"
+    "url": "assets/api.a6e8cdff.js",
+    "revision": "afe9597fc7fa66ebf9114292eeb60003"
   }, {
-    "url": "assets/Create.ae52eab2.js",
-    "revision": "8d1fe2f5cacf029ca8d9aa90e709c245"
+    "url": "assets/Create.6e9da2dc.js",
+    "revision": "8f2a0f69ba98721bcf7e0fea30916cac"
   }, {
-    "url": "assets/Home.3644695a.js",
-    "revision": "f2a47df62bdfa8e6bde6d9b8fdf15519"
+    "url": "assets/Create.7feb3a1c.css",
+    "revision": "dd7bece12bbdcfd833dcf3359c8bef46"
   }, {
-    "url": "assets/Home.5463b057.css",
-    "revision": "ed52639c245c9c53b749658dbaf7c7ce"
+    "url": "assets/Home.3eb4ca8d.js",
+    "revision": "62b5ea25e6217a9ff53a0e6a4f1c6e20"
   }, {
-    "url": "assets/index.82e32e5c.css",
-    "revision": "bd3cc3ad6f2f70a14b280b4d9ff05863"
+    "url": "assets/Home.c13e0ff5.css",
+    "revision": "e367aa5e8df730ba03c8311c1d16ddbd"
   }, {
-    "url": "assets/index.a40f8658.js",
-    "revision": "68009c60b2c7f8ef2316ec1d02033bca"
+    "url": "assets/index.3300764c.css",
+    "revision": "69bd5b6fa4b65e0507cf796c888c4331"
   }, {
-    "url": "assets/Play.763e39ec.css",
-    "revision": "f7f6f4a714bb8e9a33233c7ce842a753"
+    "url": "assets/index.77b72fb4.js",
+    "revision": "a293419a0a7e20927b5e336a8eae9b70"
   }, {
-    "url": "assets/Play.f9c8f3b3.js",
-    "revision": "9eba8d88e872eaa1da06331c3af65199"
+    "url": "assets/Play.2c51cbfd.css",
+    "revision": "c659af7078e74925de225b8e2432781f"
+  }, {
+    "url": "assets/Play.f90e5118.js",
+    "revision": "5ad0616049d9aea7b5dab38f606e5597"
+  }, {
+    "url": "assets/Ranking.608ace10.css",
+    "revision": "dbd68d835f22ae3d9a7bae4fb61c8e58"
+  }, {
+    "url": "assets/Ranking.a1e5f110.js",
+    "revision": "8f9f5be11ebc9079cd3701e684545f1a"
   }, {
     "url": "assets/sweetalert2.314ae3be.js",
     "revision": "0b9eaca7c8de09dfa597d421f542c146"
   }, {
-    "url": "assets/vendor.0df4e93f.js",
-    "revision": "bbf7dbb5d885f88d61a9c445c315ec7a"
+    "url": "assets/vendor.8a3ab317.js",
+    "revision": "e7b93d3ed382ead5be1a874beec3671c"
   }, {
     "url": "index.html",
-    "revision": "39f9805597898a1892b28cc5b7e22af6"
+    "revision": "f293fe0405a93a9354c2dd5076090389"
   }, {
     "url": "registerSW.js",
     "revision": "1872c500de691dce40960bb85481de07"
   }, {
     "url": "favicon.ico",
     "revision": "1ba2ae710d927f13d483fd5d1e548c9b"
+  }, {
+    "url": "icon/192x192.png",
+    "revision": "044dac4f541d8551fcf911a60e1ede19"
   }, {
     "url": "manifest.webmanifest",
     "revision": "66527ba2da17691d5d56d6f0a42ef96b"
