@@ -4,10 +4,112 @@
         <meta charset="UTF-8" />
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>製作自己的 RPG 遊戲</title>
+        <link rel="apple-touch-icon" href="/icon/192x192.png" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="RPGPlus" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (-webkit-device-pixel-ratio: 3)" href="/splash/background.png" />
+        <meta name="theme-color" content="#a78bfa" />
+        <title>RPG Plus</title>
+        <style id="launch-animation-style">
+            #launch-animation {
+                display: none;
+            }
+            @media all and (display-mode: standalone) {
+                html,
+                body {
+                    background: #6257f0 !important;
+                }
+                #launch-animation {
+                    z-index: 9999;
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    color: white;
+                    font-family: Arial, Helvetica, sans-serif;
+                    font-size: 2rem;
+                    font-weight: bold;
+                    background: radial-gradient(circle at 40%, #516af3 0%, #6652f0 100%);
+                    transition: all 0.6s;
+                }
+                #la-title {
+                    width: 360px;
+                    height: 100px;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                }
+                #la-RPGle {
+                    left: 12.5px;
+                    transition: all 0.8s;
+                }
+                #la-Play {
+                    right: 12.5px;
+                    background: #5565f2;
+                    transition: all 0.8s;
+                }
+                #la-RPGPlus {
+                    position: absolute;
+                    display: none;
+                    text-shadow: rgba(229, 231, 235, 1) 0 0 15px;
+                }
+            }
+        </style>
     </head>
     <body>
+        <div id="launch-animation">
+            <div id="la-title">
+                <div id="la-RPGle">RPGle</div>
+                <div id="la-Play">Play</div>
+                <div id="la-RPGPlus">RPGPlus</div>
+            </div>
+        </div>
         <div id="app"></div>
-        <script type="module" src="/src/main.js"></script>
+        <script>
+            window.LAR = async () => {
+                const bg = this.document.querySelector("#launch-animation");
+                const RPGle = this.document.querySelector("#la-RPGle");
+                const Play = this.document.querySelector("#la-Play");
+                const RPGPlus = this.document.querySelector("#la-RPGPlus");
+                await new Promise((r) => setTimeout(r, 500));
+                RPGle.style.left = "-8px";
+                Play.style.right = "-8px";
+                RPGle.style.transform = "skewX(-20deg)";
+                Play.style.transform = "skewX(-20deg)";
+                RPGle.style.textShadow = "rgba(156, 163, 175, 1) 0 0 10px";
+                Play.style.textShadow = "rgba(156, 163, 175, 1) 0 0 10px";
+                await new Promise((r) => setTimeout(r, 1200));
+                RPGle.style.transition = "all 0.15s";
+                Play.style.transition = "all 0.15s";
+                RPGle.style.left = "12.5px";
+                Play.style.right = "12.5px";
+                RPGle.style.transform = "skewX(0)";
+                Play.style.transform = "skewX(0)";
+                RPGle.style.textShadow = "rgba(229, 231, 235, 1) 0 0 15px";
+                Play.style.textShadow = "rgba(229, 231, 235, 1) 0 0 15px";
+                await new Promise((r) => setTimeout(r, 150));
+                RPGle.style.display = "none";
+                Play.style.display = "none";
+                RPGPlus.style.display = "block";
+                await new Promise((r) => setTimeout(r, 300));
+                RPGPlus.style.transition = "all 0.5s";
+                RPGPlus.style.opacity = "0";
+                await new Promise((r) => setTimeout(r, 600));
+                bg.style.opacity = "0";
+                await new Promise((r) => setTimeout(r, 600));
+                bg.style.display = "none";
+                bg.remove();
+                document.querySelector("#launch-animation-style").remove();
+            };
+        </script>
+        <script type="module" src="/src/main.ts"></script>
     </body>
 </html>
